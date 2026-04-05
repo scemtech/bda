@@ -1,0 +1,56 @@
+Execution Steps
+1. Open the terminal and create a directory using your USN.
+For example, if your USN is xxxxxx:
+2. mkdir xxxxxxx
+3. cd xxxxxxx
+4. Create the following text files using gedit:
+To create data.txt:
+gedit data.txt
+Paste the following content into the file, then save and close:
+John,25,New York
+Alice,30,Los Angeles
+Bob,35,Chicago
+Eve,28,Boston
+Mark,40,Miami
+To create data1.txt:
+gedit data1.txt
+Paste the following content:
+1,John
+2,Alice
+3,Bob
+4,Eve
+5,Mark
+To create data2.txt:
+gedit data2.txt
+Paste the following content:
+1,25
+2,30
+3,35
+4,28
+5,40
+3. Create the Pig script file using gedit:
+gedit script.pig
+Paste the following code into it:
+data = LOAD 'data.txt' USING PigStorage(',') AS (name:chararray, age:int, city:chararray);
+sorted_data = ORDER data BY age DESC;
+grouped_data = GROUP data BY age;
+data1 = LOAD 'data1.txt' USING PigStorage(',') AS (id:int, name:chararray);
+data2 = LOAD 'data2.txt' USING PigStorage(',') AS (id:int, age:int);
+joined_data = JOIN data1 BY id, data2 BY id;
+projected_data = FOREACH data GENERATE name, age;
+filtered_data = FILTER data BY age >30;
+STORE sorted_data INTO 'sorted_data_output' USING PigStorage(',');
+STORE grouped_data INTO 'grouped_data_output' USING PigStorage(',');
+STORE joined_data INTO 'joined_data_output' USING PigStorage(',');
+STORE projected_data INTO 'projected_data_output' USING PigStorage(',');
+STORE filtered_data INTO 'filtered_data_output' USING PigStorage(',');
+4. Finally, run the Pig script in local mode:
+pig-x local script.pig
+________________________________________
+Output:
+After execution, the following directories will be created in your USN folder:
+sorted_data_output Contains records sorted by age in descending order.
+grouped_data_output Contains records grouped by age.
+joined_data_output Result of joining data1.txt and data2.txt by id.
+projected_data_output Contains only name and age fields from data.txt.
+filtered_data_output Contains records where age >30.
