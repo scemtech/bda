@@ -79,3 +79,28 @@ public class GradeMapReduce {
         System.exit(job.waitForCompletion(true) ? 0 : 1);
     }
 }
+
+
+mkdir usn_prog3 
+cd usn_prog3 
+gedit StudentGrades.java 
+start-all.sh 
+jps 
+export HADOOP_CLASSPATH=$(hadoop classpath) 
+mkdir Input  
+cd Input 
+gedit grades.txt 
+Anusha 85 92 78 
+Alice 90 88 95 
+Bob 40 72 60 
+David 30 35 50 
+cd ..   
+hadoop fs -mkdir /grades_usn 
+hadoop fs -mkdir /grades_usn/Input 
+hadoop fs -put ./Input/grades.txt/ /grades_usn/Input 
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64 
+export PATH=$JAVA_HOME/bin:$PATH 
+javac -classpath $(hadoop classpath) -d . StudentGrades.java 
+jar -cvf grades.jar  -C  . . 
+hadoop jar grades.jar  StudentGrades  /grades_usn/Input  /grades_usn/Input/output 
+hadoop fs -cat /grades_usn/Input/output/part-r-00000
