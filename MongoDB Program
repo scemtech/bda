@@ -30,7 +30,7 @@ def read_documents():
 		for doc in documents:
 			print(doc)
 			
-#UPDATE 
+
 def update_documents():
 	name=input("Enter the name of the document to update:").strip()
 	field = input("Which field do you want to update? (name/age/city):").strip().lower()
@@ -53,7 +53,7 @@ def update_documents():
 	else:
 		print("No matching document found")
 		
-#DELETE 
+
 def delete_documents():
 	name=input("Enter the name of document to delete:").strip()
 	query = {"name":name}
@@ -63,7 +63,7 @@ def delete_documents():
 	else:
 		print("No matching document found:")
 		
-#MENU LOOP
+
 def menu():
 	while True:
 		print("\n MongoDB CRUB Operations Menu")
@@ -88,7 +88,7 @@ def menu():
 		else:
 			print("Invalid Choice. Please enter a valid number between 1 to 5")
 	   	
-#RUN <MENU: 
+
 if __name__=="__main__":
 	menu()
 	
