@@ -65,3 +65,10 @@ val silhouetteScore = evaluator.evaluate(predictions)
 
 println(s"Silhouette score : $silhouetteScore")
 predictions.select("age", "income", "spending_score", "cluster").show()
+
+
+//Implement clustering techniques using SPARK.
+Step 1: go to desktop and create a Folder and name it anything of your choice
+Step 2: Now open the folder and open a terminal inside that folder and type the following
+command
+gedit KMeansClustering.scala
